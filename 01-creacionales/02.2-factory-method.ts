@@ -35,19 +35,27 @@ interface Report {
 // Implementar SalesReport e InventoryReport
 
 class SalesReport implements Report {
-  // TODO: implementar el método e imprimir en consola:
-  // 'Generando reporte de ventas...'
+  generate(): void {
+    console.log('Generando reporte de %cVentas', COLORS.green)
+  }
 }
 
 class InventoryReport implements Report {
-  // TODO: implementar el método e imprimir en consola:
-  // 'Generando reporte de inventario...'
+  generate(): void {
+    console.log('Generando reporte de %cInventario', COLORS.blue)
+  }
+}
+
+class AccountancyReport implements Report {
+  generate(): void {
+    console.log('Generando reporte de %cContaduría', COLORS.yellow)
+  }
 }
 
 // 3. Clase Base ReportFactory con el Método Factory
 
 abstract class ReportFactory {
-  abstract createReport(): Report;
+  protected abstract createReport(): Report;
 
   generateReport(): void {
     const report = this.createReport();
@@ -58,14 +66,20 @@ abstract class ReportFactory {
 // 4. Clases Concretas de Fábricas de Reportes
 
 class SalesReportFactory extends ReportFactory {
-  createReport(): Report {
-    throw new Error('Method not implemented.');
+  override createReport(): Report {
+    return new SalesReport()
   }
 }
 
 class InventoryReportFactory extends ReportFactory {
-  createReport(): Report {
-    throw new Error('Method not implemented.');
+  override createReport(): Report {
+    return new InventoryReport()
+  }
+}
+
+class AccountancyReportFactory extends ReportFactory {
+  override createReport(): Report {
+    return new AccountancyReport()
   }
 }
 
@@ -74,15 +88,16 @@ class InventoryReportFactory extends ReportFactory {
 function main() {
   let reportFactory: ReportFactory;
 
-  const reportType = prompt(
-    '¿Qué tipo de reporte deseas? %c(sales/inventory)',
-    COLORS.red
-  );
+  const reportType = prompt('¿Qué tipo de reporte deseas? (sales/inventory/accountancy)');
 
   if (reportType === 'sales') {
     reportFactory = new SalesReportFactory();
-  } else {
+  } else if(reportType === 'inventory') {
     reportFactory = new InventoryReportFactory();
+  } else if(reportType === 'accountancy') {
+    reportFactory = new AccountancyReportFactory();
+  } else {
+    throw new Error('Invalid TypeReport');
   }
 
   reportFactory.generateReport();
