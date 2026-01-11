@@ -10,6 +10,8 @@
  * https://refactoring.guru/es/design-patterns/prototype
  */
 
+import { COLORS } from "../helpers/colors.ts";
+
 class Pokemon {
   name: string;
   type: string;
@@ -17,13 +19,15 @@ class Pokemon {
   attacks: string[];
 
   constructor(name: string, type: string, level: number, attacks: string[]) {
-    throw new Error('Method not implemented.');
+    this.name = name;
+    this.type = type;
+    this.level = level;
+    this.attacks = attacks;
   }
-
+  
   // Método para clonar el Pokémon
   clone(): Pokemon {
-    // Los ataques deben de evitar pasarse por referencia, es decir, no deben de ser el mismo arreglo.
-    // Completar: Debe devolver un nuevo Pokémon con los mismos atributos
+    return new Pokemon(this.name, this.type, this.level, [...this.attacks]);
   }
 
   displayInfo(): void {
@@ -34,6 +38,25 @@ class Pokemon {
     );
   }
 }
+
+function main() {
+  const pokemon = new Pokemon('Pikachu', 'Electric', 25, ["Thunderbolt", "Quick Attack", "Iron Tail", "Electro Ball"]);
+
+  const evolution = pokemon.clone();
+  evolution.name = 'Raichu';
+  evolution.level = 50;
+  evolution.attacks.push('Volt Tackle');
+
+  // console.log({ pokemon });
+  console.log('%cPikachu', COLORS.yellow);
+  pokemon.displayInfo();
+  
+  // console.log({ evolution });
+  console.log('%cRaichu', COLORS.red);
+  evolution.displayInfo();
+}
+
+main();
 
 // Tarea:
 // 1. Crear un Pokémon base.
