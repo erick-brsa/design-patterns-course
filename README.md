@@ -1,11 +1,5 @@
-## Patrones de diseño
+# 🏗️ Patrones de Diseño
 
-El código está escrito en TypeScript y usamos Deno para ejecutarlo, puedes usar Bun o Node si lo prefieres.
+Este repositorio contiene implementaciones prácticas de los 23 patrones de diseño clásicos del libro "Design Patterns: Elements of Reusable Object-Oriented Software" (GoF). Cada patrón está organizado por categoría y acompañado de ejemplos claros y diagramas explicativos.
 
-Si usas Node, deberás configurar TypeScript, por lo que te recomiendo Deno o Bun.
-
-
-
-# Recursos adicionales
-
-[Fuentes recomendadas](https://gist.github.com/Klerith/f7f558766cb9ad8f36e471cceb5dd910)
+Los ejemplos están diseñados para ser didácticos y fáciles de entender, mostrando casos de uso realistas donde cada patrón resuelve problemas específicos de diseño de software. Ideal para desarrolladores que quieren aprender o repasar estos conceptos fundamentales.
